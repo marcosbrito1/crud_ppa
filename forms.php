@@ -35,7 +35,7 @@
             </form>
         </fieldset>
         <br>
-        <a href="index.php">Usuários cadastrados</a>
+        <a href="home.php">Usuários cadastrados</a>
     </div>
 
 </body>

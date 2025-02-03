@@ -10,6 +10,9 @@
 <body>
 <?php
 include 'banco.php';
+include 'UserLoginSession.php';
+verificarSessao();
+
 $id_usuario = filter_input(INPUT_GET,'id_usuario',FILTER_SANITIZE_NUMBER_INT);
 $result = get_usuario($id_usuario);
 $linha = $result[0];
@@ -47,7 +50,7 @@ $linha = $result[0];
             <input type="submit" value="Confirma alteração">
         </form>
         <br>
-        <a href="index.php">Usuários cadastrados</a>
+        <a href="home.php">Usuários cadastrados</a>
     </div>
 
 </body>

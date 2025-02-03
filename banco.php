@@ -14,7 +14,7 @@ function cadastrar_usuario($nome, $email, $sexo,$senha)
     $instrucao->bindParam(":SENHA",$senha);
 
     $instrucao->execute();
-    header('Location:index.php');
+    header('Location:home.php');
 }
 
 function atualizar_usuario($id_usuario, $nome, $email, $sexo)
@@ -31,7 +31,7 @@ function atualizar_usuario($id_usuario, $nome, $email, $sexo)
   $instrucao->execute();
 $retorno = $instrucao->execute();
   if($retorno){
-      header('Location:index.php');
+      header('Location:home.php');
   }
   else{
       echo "Erro ao atualizar o usuário de id = ".$id_usuario;
@@ -40,10 +40,8 @@ $retorno = $instrucao->execute();
 
 function get_usuarios(){
     $conn = conectar();
-    $sql = 'SELECT * FROM usuario ORDER BY nome';
-
+    $sql = "SELECT * FROM usuario ORDER BY nome";
     $instrucao = $conn->prepare($sql);
-    $instrucao->bindParam(":ID_USUARIO",$id_usuario);
     $instrucao->execute();
 
     $result = $instrucao->fetchAll(PDO::FETCH_ASSOC);
@@ -69,7 +67,7 @@ function  excluir_usuario($id_usuario){
     $instrucao->bindParam(":ID_USUARIO",$id_usuario);
     $retorno = $instrucao->execute();
     if($retorno){
-        header('Location:index.php');
+        header('Location:home.php');
     }
     else{
         echo "Erro ao pagar o usuário de id = ".$id_usuario;
