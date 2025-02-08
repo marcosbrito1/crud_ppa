@@ -5,6 +5,19 @@
     <title>Edição de usuário</title>
     <link rel="stylesheet" type="text/css" href="css/edit.css">
 
+    <script type="text/javascript">
+      function previewFoto(event){
+        var reader = new FileReader();
+        reader.onload = function(){
+          var output = document.getElementById('foto_atual');
+          output.src = reader.result;
+          output.style.display = 'block';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+
+      }
+    </script>
+
 </head>
 
 <body>
@@ -20,7 +33,7 @@ $linha = $result[0];
 
     <h2> Alterar informações do usuário</h2>
     <div>
-        <form method="POST" action="editar.php">
+        <form method="POST" action="editar.php" enctype="multipart/form-data">
             <label for="codigo">Código:</label>
             <input type="text" id="codigo" name="codigo" value="<?php echo $linha['id_usuario'];?>" readonly="true"><br>
 
@@ -46,7 +59,11 @@ $linha = $result[0];
                 value="Feminino">
                 <label for="fem">Feminino</label>
 
-            </fieldset>
+            </fieldset><br><br>
+            <img id="foto_atual" src="images/<?php echo $linha['foto'];?>" alt="Foto Atual" width="100"><br>
+
+            <input type="file" id="foto" name="foto" accept="image/png, image/jpeg" onchange="previewFoto(event)">
+            <br><br>
             <input type="submit" value="Confirma alteração">
         </form>
         <br>

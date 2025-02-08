@@ -1,10 +1,10 @@
 <?php
 include 'config.php';
 
-function cadastrar_usuario($nome, $email, $sexo,$senha)
+function cadastrar_usuario($nome, $email, $sexo,$senha, $foto)
 {
     $conn = conectar();
-    $sql = "INSERT INTO  usuario (nome, email, sexo,senha) VALUES (:NOME,:EMAIL,:SEXO,:SENHA)";
+    $sql = "INSERT INTO  usuario (nome, email, sexo,senha, foto) VALUES (:NOME,:EMAIL,:SEXO,:SENHA, :FOTO)";
 
     $instrucao = $conn->prepare($sql);
 
@@ -12,22 +12,34 @@ function cadastrar_usuario($nome, $email, $sexo,$senha)
     $instrucao->bindParam(":EMAIL",$email);
     $instrucao->bindParam(":SEXO",$sexo);
     $instrucao->bindParam(":SENHA",$senha);
+    $instrucao->bindParam(":FOTO", $foto);
 
     $instrucao->execute();
     header('Location:home.php');
 }
 
-function atualizar_usuario($id_usuario, $nome, $email, $sexo)
+function atualizar_usuario($id_usuario, $nome, $email, $sexo, $foto = null)
 {
   $conn = conectar();
-  $sql = 'UPDATE usuario SET nome = :NOME, email = :EMAIL, sexo = :SEXO
-  WHERE id_usuario=:ID_USUARIO';
+
+  if($foto){
+    $sql = 'UPDATE usuario SET nome = :NOME, email = :EMAIL, sexo = :SEXO, foto = :FOTO
+    WHERE id_usuario=:ID_USUARIO';
+  }else{
+    $sql = 'UPDATE usuario SET nome = :NOME, email = :EMAIL, sexo = :SEXO
+    WHERE id_usuario=:ID_USUARIO';
+  }
+
 
   $instrucao = $conn->prepare($sql);
   $instrucao->bindParam(":ID_USUARIO",$id_usuario);
   $instrucao->bindParam(":NOME",$nome);
   $instrucao->bindParam(":EMAIL",$email);
   $instrucao->bindParam(":SEXO",$sexo);
+if($foto){
+  $instrucao->bindParam(":FOTO", $foto);
+}
+
   $instrucao->execute();
 $retorno = $instrucao->execute();
   if($retorno){

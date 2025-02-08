@@ -41,6 +41,7 @@ verificarSessao();
             echo'</table>';
 ?>
             <a class="linkNovo" href="forms.php">Novo Usuário</a>
+            <a class="linkNovo" href="listUsers.php">Cadastros com foto</a>
             <a class = "linkNovo" href="logout.php">Sair</a>
         </div>
     </body>

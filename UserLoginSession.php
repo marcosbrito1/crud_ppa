@@ -17,7 +17,7 @@ include 'config.php';
       $result = $instrucao->fetchALL(PDO::FETCH_ASSOC);
       $_SESSION['logado'] = $result[0]['nome'];
       //armazena cookie:
-      // setcookie('usernameppa', $_SESSION['logado'], time()+(86400*30), "/");
+       setcookie('usernameppa', $_SESSION['logado'], time()+(86400*30), "/");
       return true;
     }else{
       return false;
